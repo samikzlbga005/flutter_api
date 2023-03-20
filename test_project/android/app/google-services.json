@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1019201363219",
+    "project_id": "testproject-fecfe",
+    "storage_bucket": "testproject-fecfe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1019201363219:android:d1e0920da7611d18954ee6",
+        "android_client_info": {
+          "package_name": "com.example.test_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1019201363219-3bfehj0g6ob37b6uf6fe73tvibql35a2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPCUpmecZRgqh-5-X_5hY0XoM0bQbAOW4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1019201363219-3bfehj0g6ob37b6uf6fe73tvibql35a2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
