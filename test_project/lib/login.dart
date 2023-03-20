@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:test_project/main.dart';
 import 'package:test_project/register.dart';
+import 'home_page.dart';
 
 class Login extends StatefulWidget {
-  const Login({super.key});
+  Login({super.key});
 
   @override
   State<Login> createState() => _LoginState();
@@ -44,6 +47,14 @@ class _LoginState extends State<Login> {
                   UserCredential credential =
                       await auth.signInWithEmailAndPassword(
                           email: username.text, password: password.text);
+
+                  final User? firebaseUser = credential.user;
+
+                  if (firebaseUser != null) {
+                    print(firebaseUser.uid);
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => HomePage()));
+                  }
                   print(credential);
                 } catch (e) {
                   print(e.toString());
@@ -54,7 +65,7 @@ class _LoginState extends State<Login> {
                   context,
                   PageRouteBuilder(
                     pageBuilder: (context, animation, secondaryAnimation) =>
-                        const Register(),
+                        Register(),
                     transitionsBuilder:
                         (context, animation, secondaryAnimation, child) {
                       const begin = Offset(0.0, 1.0);

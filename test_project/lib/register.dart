@@ -4,7 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class Register extends StatefulWidget {
-  const Register({super.key});
+   Register({super.key});
 
   @override
   State<Register> createState() => _Register();
