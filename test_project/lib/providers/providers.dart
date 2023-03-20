@@ -21,4 +21,10 @@ class modelProvider extends ChangeNotifier {
     _newUser = response;
     notifyListeners();
   }
+
+  Future<void> deleteUser(String id) async {
+    final response = await _service.deleteUser(id);
+    bool val = response;
+    notifyListeners();
+  }
 }

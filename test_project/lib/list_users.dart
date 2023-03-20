@@ -54,7 +54,10 @@ class _UserListState extends State<UserList> {
                 padding: EdgeInsets.only(bottom: 10),
                 child: Row(
                   children: [
-                    CircleAvatar(child: Text("asd") //Image.network(user.image),
+                    CircleAvatar(
+                        child: Container(
+                      child: Image.network(user.image),
+                    ) //Image.network(user.image),
                         ),
                     SizedBox(
                       width: 15,
@@ -69,7 +72,14 @@ class _UserListState extends State<UserList> {
                         Text("Email: " + user.email),
                       ],
                     ),
-                    TextButton(onPressed: () {}, child: Text('delete')),
+                    TextButton(
+                        onPressed: () async {
+                          var provider = Provider.of<modelProvider>(context,
+                              listen: false);
+                          provider.deleteUser(user.id!);
+                          setState(() {});
+                        },
+                        child: Text('delete')),
                     TextButton(onPressed: () {}, child: Text('update')),
                   ],
                 ),
@@ -78,7 +88,6 @@ class _UserListState extends State<UserList> {
           ),
         ),
       ),
-     
     );
   }
 }

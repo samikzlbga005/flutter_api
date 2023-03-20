@@ -56,9 +56,11 @@ class _AddUser extends State<AddUser> {
                 _button_filed(() async {
                   if (name.text == null && email.text == null) {
                   } else {
-                    context
-                        .watch<modelProvider>()
-                        .setUser(name.text, email.text, image);
+                    var provider =
+                        Provider.of<modelProvider>(context, listen: false);
+                    await provider.setUser(name.text, email.text, image);
+                    name.text = "";
+                    email.text = "";
                   }
                 }, 'Add User'),
               ],
