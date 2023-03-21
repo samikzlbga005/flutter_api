@@ -30,7 +30,7 @@ class _UpdateUserState extends State<UpdateUser> {
     userModel user = context.watch<modelProvider>().newUser;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add User'),
+        title: Text('Update User'),
       ),
       body: SingleChildScrollView(
         child: SafeArea(
