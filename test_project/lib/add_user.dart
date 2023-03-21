@@ -9,7 +9,8 @@ import 'package:test_project/providers/providers.dart';
 import 'models/user_model.dart';
 
 class AddUser extends StatefulWidget {
-  AddUser({super.key});
+  userModel? user;
+  AddUser({super.key, this.user});
 
   @override
   State<AddUser> createState() => _AddUser();
@@ -23,9 +24,15 @@ class _AddUser extends State<AddUser> {
   @override
   void initState() {
     // TODO: implement initState
-    name = TextEditingController(text: "");
-    email = TextEditingController(text: "");
-    image = Faker().image.image(random: true).toString();
+    name = widget.user == null
+        ? TextEditingController(text: "")
+        : TextEditingController(text: widget.user!.name);
+    email = widget.user == null
+        ? TextEditingController(text: "")
+        : TextEditingController(text: widget.user!.email);
+    image = widget.user == null
+        ? Faker().image.image(random: true).toString()
+        : widget.user!.image.toString();
     super.initState();
 
     /* WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -53,16 +60,28 @@ class _AddUser extends State<AddUser> {
                   height: 30,
                 ),
                 Image.network(image),
-                _button_filed(() async {
-                  if (name.text == null && email.text == null) {
-                  } else {
-                    var provider =
-                        Provider.of<modelProvider>(context, listen: false);
-                    await provider.setUser(name.text, email.text, image);
-                    name.text = "";
-                    email.text = "";
-                  }
-                }, 'Add User'),
+                widget.user == null
+                    ? _button_filed(() async {
+                        if (name.text == null && email.text == null) {
+                        } else {
+                          var provider = Provider.of<modelProvider>(context,
+                              listen: false);
+                          await provider.setUser(name.text, email.text, image);
+                          name.text = "";
+                          email.text = "";
+                        }
+                      }, 'Add User')
+                    : _button_filed(() async {
+                        if (name.text == null && email.text == null) {
+                        } else {
+                          widget.user!.name = name.text;
+                          widget.user!.email = email.text;
+                          widget.user!.image = image.toString();
+                          var provider = Provider.of<modelProvider>(context,
+                              listen: false);
+                          await provider.updateUser(widget.user!);
+                        }
+                      }, 'Update User'),
               ],
             ),
           ),

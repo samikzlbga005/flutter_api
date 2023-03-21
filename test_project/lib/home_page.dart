@@ -1,4 +1,5 @@
 import 'package:faker/faker.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -10,7 +11,8 @@ import 'add_user.dart';
 import 'models/user_model.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  User? user;
+  HomePage({super.key, this.user});
 
   @override
   State<HomePage> createState() => _HomePageState();

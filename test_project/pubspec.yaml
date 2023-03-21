@@ -39,8 +39,6 @@ dependencies:
   firebase_auth: ^4.3.0
   http: ^0.13.5
   provider: ^6.0.5
-  flutter_toast_message: ^0.0.1
-  fluttertoast: ^8.2.1
   faker: ^2.1.0
 
 dev_dependencies:

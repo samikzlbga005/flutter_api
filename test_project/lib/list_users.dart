@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:provider/provider.dart';
+import 'package:test_project/add_user.dart';
 import 'package:test_project/providers/providers.dart';
 
 import 'models/user_model.dart';
@@ -80,7 +81,16 @@ class _UserListState extends State<UserList> {
                           setState(() {});
                         },
                         child: Text('delete')),
-                    TextButton(onPressed: () {}, child: Text('update')),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AddUser(
+                                        user: user,
+                                      )));
+                        },
+                        child: Text('update')),
                   ],
                 ),
               );
