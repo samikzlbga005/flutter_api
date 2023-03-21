@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:test_project/home_page.dart';
 import 'package:test_project/main.dart';
 import 'package:test_project/register.dart';
-import 'home_page.dart';
 
 class Login extends StatefulWidget {
   Login({super.key});
@@ -52,7 +52,7 @@ class _LoginState extends State<Login> {
                   if (firebaseUser != null) {
                     print(firebaseUser.uid);
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => HomePage()));
+                        MaterialPageRoute(builder: (context) => UserList()));
                   }
                   print(credential);
                 } catch (e) {

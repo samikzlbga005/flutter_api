@@ -1,35 +1,33 @@
+import 'dart:math';
+
 import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+import 'package:test_project/models/user_model.dart';
 import 'package:test_project/providers/providers.dart';
-import 'models/user_model.dart';
 
-class AddUser extends StatefulWidget {
-  AddUser({super.key});
+class UpdateUser extends StatefulWidget {
+  const UpdateUser({super.key});
 
   @override
-  State<AddUser> createState() => _AddUser();
+  State<UpdateUser> createState() => _UpdateUserState();
 }
 
-class _AddUser extends State<AddUser> {
-  TextEditingController name = TextEditingController(text: "");
-  TextEditingController email = TextEditingController(text: "");
-  String image = "";
-
-  @override
-  void initState() {
-    // TODO: implement initState
-
-    super.initState();
-  }
-
+class _UpdateUserState extends State<UpdateUser> {
+  late TextEditingController name = TextEditingController(text: "");
+  late TextEditingController email = TextEditingController(text: "");
+  String image = Faker().image.image();
   @override
   Widget build(BuildContext context) {
-    image = Faker().image.image(random: true).toString();
+    name = TextEditingController(
+        text: context.watch<modelProvider>().newUser.name);
+    email = TextEditingController(
+        text: context.watch<modelProvider>().newUser.email);
+    image = context.watch<modelProvider>().newUser.image;
 
+    userModel user = context.watch<modelProvider>().newUser;
     return Scaffold(
       appBar: AppBar(
         title: Text('Add User'),
@@ -39,6 +37,7 @@ class _AddUser extends State<AddUser> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 _textfield(name, "Name"),
                 SizedBox(
@@ -50,16 +49,14 @@ class _AddUser extends State<AddUser> {
                 ),
                 Image.network(image),
                 _button_filed(() async {
-                  if (name.text == null && email.text == null) {
-                  } else {
-                    var provider =
-                        Provider.of<modelProvider>(context, listen: false);
-                    await provider.setUser(name.text, email.text, image);
-                    name.text = "";
-                    email.text = "";
-                    Navigator.pop(context);
-                  }
-                }, 'Add User')
+                  user.name = name.text;
+                  user.email = email.text;
+                  user.image = image;
+                  var provider =
+                      Provider.of<modelProvider>(context, listen: false);
+                  await provider.updateUser(user);
+                  Navigator.pop(context);
+                }, 'Update User'),
               ],
             ),
           ),

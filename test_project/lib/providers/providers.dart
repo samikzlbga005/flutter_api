@@ -9,6 +9,14 @@ class modelProvider extends ChangeNotifier {
   userModel? _newUser;
   userModel get newUser => _newUser!;
 
+  bool isadd = false;
+
+  set_user(userModel currentUser){
+    _newUser = currentUser;
+    notifyListeners();
+  }
+
+
   Future<void> getAllUser() async {
     final response = await _service.getUsers();
     _user_list = response;
@@ -20,6 +28,7 @@ class modelProvider extends ChangeNotifier {
     userModel newUser = userModel(name: name, email: email, image: image);
     final response = await _service.postUser(newUser);
     _newUser = response;
+    
     getAllUser();
     notifyListeners();
   }
@@ -32,9 +41,8 @@ class modelProvider extends ChangeNotifier {
   }
 
   Future<void> updateUser(userModel user) async {
-    
     final response = await _service.updateUser(user);
-    
+
     getAllUser();
     notifyListeners();
   }
